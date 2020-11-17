@@ -1,0 +1,58 @@
+package com.company;
+
+import com.sun.tools.corba.se.idl.constExpr.And;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        // write your code here
+        Scanner cardNum = new Scanner(System.in);
+        System.out.print("Input credit card number: ");
+        Long number;
+        number = cardNum.nextLong();
+        System.out.println("Credit Card Number: " + number);
+        int sum = 0;
+
+        String cardNumber = String.valueOf(number);
+
+        if (cardNumber.startsWith("34") || cardNumber.startsWith("37") || cardNumber.length() == 15) {
+            System.out.println("Card company: American Express");
+        } else if (cardNumber.startsWith("4") || cardNumber.length() == 13 || cardNumber.length() == 16) {
+            System.out.println("Card company: VISA");
+        } else if (cardNumber.startsWith("51") || cardNumber.startsWith("52") || cardNumber.startsWith("53") || cardNumber.startsWith("54") || cardNumber.startsWith("55") || cardNumber.length() == 16) {
+            System.out.println("Card company: MasterCard");
+        } 
+        
+        
+        int nSum = 0;
+        boolean isSecond = false;
+        for (int i = cardNumber.length() - 1; i >= 0; i--) 
+        {
+     
+            int d = cardNumber.charAt(i) - '0';
+     
+            if (isSecond == true)
+                d = d * 2;
+     
+            // We add two digits to handle
+            // cases that make two digits 
+            // after doubling
+            nSum += d / 10;
+            nSum += d % 10;
+     
+            isSecond = !isSecond;
+        }
+        boolean isValid=nSum % 10 == 0;
+
+
+
+             if (isValid) {
+             System.out.println("You have entered a VALID card number");
+              } else
+           System.out.println("You have entered an INVALID card number");
+     }
+    
+    
+    }
